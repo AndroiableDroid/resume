@@ -181,7 +181,7 @@
 	\textsc{#1} & \textbf{#2}\\ % Duration and degree
 	\expandafter\ifstrequal\expandafter{#3}{}{}{& {\small\textsc{#3}}\\} % Honors, achievements or distinctions (e.g. first class honors)
 	\expandafter\ifstrequal\expandafter{#4}{}{}{& #4\\} % Department
-	\expandafter\ifstrequal\expandafter{#5}{}{}{& \textit{#5}\\[5pt]} % Institution
+	\expandafter\ifstrequal\expandafter{#5}{}{}{& \textit{#5}\\[3.5pt]} % Institution
 }
 
 % Command for entering a separate table row -- used for any section that uses a two column table for alignment
