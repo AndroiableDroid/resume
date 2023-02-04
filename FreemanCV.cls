@@ -39,6 +39,10 @@
 
 \usepackage{extsizes} % Allows using more default font sizes as a class option
 
+\usepackage{tikz} % Required for creating the plots
+\usetikzlibrary{shapes, backgrounds}
+\tikzset{x=1cm, y=1cm} % Default tikz units
+
 %----------------------------------------------------------------------------------------
 %	MARGINS
 %----------------------------------------------------------------------------------------
@@ -64,6 +68,44 @@
 \AtBeginEnvironment{paracol}{\setlength{\parindent}{0pt}} % Paracols have default paragraph indentation and this overrides it to the template default of no indentation
 
 \setlength\columnsep{0.05\textwidth} % Amount of horizontal space between the columns
+
+%----------------------------------------------------------------------------------------
+%	CHARTS
+%---------------------------------------------------------------------------------------- 
+
+\newcounter{barcount}
+
+% Environment to hold a new bar chart
+\newenvironment{barchart}[1]{ % The only parameter is the maximum bar width, in cm
+	\newcommand{\barwidth}{0.35}
+	\newcommand{\barsep}{0.2}
+	
+	% Command to add a bar to the bar chart
+	\newcommand{\baritem}[2]{ % The first argument is the bar label and the second is the percentage the current bar should take up of the total width
+		\pgfmathparse{##2}
+		\let\perc\pgfmathresult
+		
+		\pgfmathparse{#1}
+		\let\barsize\pgfmathresult
+		
+		\pgfmathparse{\barsize*##2/100}
+		\let\barone\pgfmathresult
+		
+		\pgfmathparse{(\barwidth*\thebarcount)+(\barsep*\thebarcount)}
+		\let\barx\pgfmathresult
+		
+		\filldraw[fill=headings, draw=none] (0,-\barx) rectangle (\barone,-\barx-\barwidth);
+		
+		\node [label=180:\colorbox{linkcolor}{\small\textcolor{white}{##1}}] at (0,-\barx-0.175) {};
+		\addtocounter{barcount}{1}
+	}
+	\begin{tikzpicture}
+		\setcounter{barcount}{0}
+}{
+	\end{tikzpicture}
+}
+
+%------------------------------------------------
 
 %----------------------------------------------------------------------------------------
 %	FONTS
@@ -117,7 +159,7 @@
 \titleformat
 	{\section} % Section type being modified
 	[block] % Section layout type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
-	{\color{headings}\scshape\LARGE\raggedright} % Text formatting of the whole section, i.e. label and title
+	{\color{headings}\scshape\LARGE\justifying} % Text formatting of the whole section, i.e. label and title
 	{} % Section label (e.g. number) and its formatting
 	{0pt} % Horizontal space between the section label and title
 	{} % Code before the section title
@@ -142,7 +184,7 @@
 %	COLORS
 %----------------------------------------------------------------------------------------
 
-\usepackage[usenames, svgnames]{xcolor} % Required for defining and using custom colors
+%\usepackage[usenames, svgnames]{xcolor} % Required for defining and using custom colors
 
 \definecolor{text}{HTML}{2b2b2b} % Main document text color, off-black
 \definecolor{headings}{HTML}{701112} % Dark red color for headings
@@ -181,12 +223,26 @@
 	\textsc{#1} & \textbf{#2}\\ % Duration and degree
 	\expandafter\ifstrequal\expandafter{#3}{}{}{& {\small\textsc{#3}}\\} % Honors, achievements or distinctions (e.g. first class honors)
 	\expandafter\ifstrequal\expandafter{#4}{}{}{& #4\\} % Department
-	\expandafter\ifstrequal\expandafter{#5}{}{}{& \textit{#5}\\[5pt]} % Institution
+	\expandafter\ifstrequal\expandafter{#5}{}{}{& \textit{#5}\\[3.5pt]} % Institution
 }
 
 % Command for entering a separate table row -- used for any section that uses a two column table for alignment
 \newcommand{\tableentry}[3]{
 	\textsc{#1} & #2\expandafter\ifstrequal\expandafter{#3}{}{\\}{\\[5pt]} % First the heading, then content, then a conditional insertion of whitespace if the third parameter has any content in it
+}
+
+\newcommand{\certentry}[4]{
+	\textsc{#1} & #2\expandafter\ifstrequal\expandafter{}{}{\\}{\\[5pt]} 
+	\textsc{} & #3\expandafter\ifstrequal\expandafter{}{}{\\}{\\[5pt]}
+	\textsc{} & #4\expandafter\ifstrequal\expandafter{spaceafter}{}{\\}{\\[5pt]}
+}
+
+
+% Command for entering a separate table duel row -- used for any section that uses a two column table for alignment
+\newcommand{\duelcertentry}[8]{
+	\textsc{#1} & #2\expandafter\ifstrequal\expandafter{}{} & \textsc{#5} & #6\expandafter\ifstrequal\expandafter{}{}{\\}{\\[5pt]}
+	\textsc{} & #3\expandafter\ifstrequal\expandafter{}{} & \textsc{} & #7\expandafter\ifstrequal\expandafter{}{}{\\}{\\[5pt]}
+	\textsc{} & #4\expandafter\ifstrequal\expandafter{}{} & \textsc{} & #8\expandafter\ifstrequal\expandafter{\\}{\\}{\\}{\\[5pt]}
 }
 
 % Command for entering a publication as a short DOI (digital object identifier) string to the publication, a link is automatically created
