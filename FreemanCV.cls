@@ -117,12 +117,12 @@
 \defaultfontfeatures{Path=Fonts/} % Specify the location of font files
 
 % The serif font used by default or explicitly with \textrm{}/\rmfamily
-\setmainfont{EBGaramond}[
-	UprightFont=*-Regular.ttf,
-	BoldFont=*-Bold.ttf,
-	BoldItalicFont=*-BoldItalic.ttf,
-	ItalicFont=*-Italic.ttf,
-	SmallCapsFont=*-SC.ttf
+\setmainfont{Calibri}[
+	UprightFont=Calibri-Regular.ttf,
+	BoldFont=Calibri-Bold.ttf,
+	BoldItalicFont=Calibri-BoldItalic.ttf,
+	ItalicFont=Calibri-Italic.ttf,
+	SmallCapsFont=Calibri-Bold.ttf
 ]
 
 % The sans serif font used explicitly with \textsf{}\sffamily
@@ -187,9 +187,9 @@
 %\usepackage[usenames, svgnames]{xcolor} % Required for defining and using custom colors
 
 \definecolor{text}{HTML}{2b2b2b} % Main document text color, off-black
-\definecolor{headings}{HTML}{701112} % Dark red color for headings
+\definecolor{headings}{HTML}{2b2b2b} % Dark red color for headings
 \definecolor{shade}{HTML}{F5DD9D} % Peach color for the contact information box
-\definecolor{linkcolor}{HTML}{641c1d} % 25% desaturated headings color for links
+\definecolor{linkcolor}{HTML}{2b2b2b} % 25% desaturated headings color for links
 
 \color{text} % Set the default text color
 
@@ -211,7 +211,7 @@
 
 % Command for adding a new job entry (work experience)
 \newcommand{\jobentry}[5]{
-	{\raggedleft\textsc{#1\expandafter\ifstrequal\expandafter{#2}{}{}{\hspace{6pt}\footnotesize{(#2)}}}\par} % Duration and conditional full time/part time text
+	{\raggedleft#1\expandafter\ifstrequal\expandafter{#2}{}{}{\hspace{6pt}\footnotesize{(#2)}}\par} % Duration and conditional full time/part time text
 	\expandafter\ifstrequal\expandafter{#3}{}{}{{\raggedright\large #3}\\} % Employer
 	\expandafter\ifstrequal\expandafter{#4}{}{}{{\raggedright\large\textit{\textbf{#4}}}\\[4pt]} % Job title
 	\expandafter\ifstrequal\expandafter{#5}{}{}{#5} % Description
@@ -220,7 +220,7 @@
 
 % Command for entering a new qualification (education)
 \newcommand{\qualificationentry}[5]{
-	\textsc{#1} & \textbf{#2}\\ % Duration and degree
+	#1 & \textbf{#2}\\ % Duration and degree
 	\expandafter\ifstrequal\expandafter{#3}{}{}{& {\small\textsc{#3}}\\} % Honors, achievements or distinctions (e.g. first class honors)
 	\expandafter\ifstrequal\expandafter{#4}{}{}{& #4\\} % Department
 	\expandafter\ifstrequal\expandafter{#5}{}{}{& \textit{#5}\\[3.5pt]} % Institution
@@ -240,7 +240,7 @@
 
 % Command for entering a separate table duel row -- used for any section that uses a two column table for alignment
 \newcommand{\duelcertentry}[8]{
-	\textsc{#1} & #2\expandafter\ifstrequal\expandafter{}{} & \textsc{#5} & #6\expandafter\ifstrequal\expandafter{}{}{\\}{\\[5pt]}
+	#1 & #2\expandafter\ifstrequal\expandafter{}{} & #5 & #6\expandafter\ifstrequal\expandafter{}{}{\\}{\\[5pt]}
 	\textsc{} & #3\expandafter\ifstrequal\expandafter{}{} & \textsc{} & #7\expandafter\ifstrequal\expandafter{}{}{\\}{\\[5pt]}
 	\textsc{} & #4\expandafter\ifstrequal\expandafter{}{} & \textsc{} & #8\expandafter\ifstrequal\expandafter{\\}{\\}{\\}{\\[5pt]}
 }
