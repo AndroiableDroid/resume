@@ -226,6 +226,13 @@
 	\expandafter\ifstrequal\expandafter{#5}{}{}{& \textit{#5}\\[3.5pt]} % Institution
 }
 
+% Command for entering a new experience (experience)
+\newcommand{\experienceentry}[4]{
+	#1 & \textbf{#2}\\ % Duration and Company
+	\expandafter\ifstrequal\expandafter{#3}{}{}{& {\small\textsc{#3}}\\} % Type (e.g. Internship or Job)
+	\expandafter\ifstrequal\expandafter{#4}{}{}{& \textit{#4}\\[3.5pt]} % Designation
+}
+
 % Command for entering a separate table row -- used for any section that uses a two column table for alignment
 \newcommand{\tableentry}[3]{
 	\textsc{#1} & #2\expandafter\ifstrequal\expandafter{#3}{}{\\}{\\[5pt]} % First the heading, then content, then a conditional insertion of whitespace if the third parameter has any content in it
