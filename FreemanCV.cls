@@ -235,7 +235,7 @@
 
 % Command for entering a separate table row -- used for any section that uses a two column table for alignment
 \newcommand{\tableentry}[3]{
-	\textsc{#1} & #2\expandafter\ifstrequal\expandafter{#3}{}{\\}{\\[5pt]} % First the heading, then content, then a conditional insertion of whitespace if the third parameter has any content in it
+	\color{headings}\textsc{#1} & #2\expandafter\ifstrequal\expandafter{#3}{}{\\}{\\[5pt]} % First the heading, then content, then a conditional insertion of whitespace if the third parameter has any content in it
 }
 
 \newcommand{\certentry}[4]{
